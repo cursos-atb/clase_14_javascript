@@ -10,7 +10,7 @@ El backend está desarrollado en **Node.js con Express**.
 git clone https://github.com/cursos-atb/clase_14_javascript.git
 cd clase_14_javascript
 ```
-#### instalacion de dependencias
+### 2️⃣ Instalación de dependencias
 
 Antes de ejecutar el servidor, instala las dependencias necesarias:
 
@@ -18,7 +18,7 @@ Antes de ejecutar el servidor, instala las dependencias necesarias:
 cd server
 npm install
 ```
-####  Levantar el servidor
+### 3️⃣ Levantar el servidor
 
 Para ejecutar el backend, usa el siguiente comando dentro de la carpeta server:
 ```sh
