@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de Campus</title>
+
+</head>
+<body>
+    <h2>Profesores</h2>
+    <button onclick="agregar('profesores')">Agregar Profesores</button>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tablaProfesores"></tbody>
+    </table>
+
+    <h2>Estudiantes</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tablaEstudiantes"></tbody>
+    </table>
+
+    <h2>Materias</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Profesores</th>
+                <th>cantidad Estudiantes</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tablaMaterias"></tbody>
+    </table>
+    <script>
+        const API_URL = "http://localhost:3000";
+        
+        function cargarLista(tipo){
+            fetch(`${API_URL}/${tipo}`) // http://localhost:3000/profesores
+                .then(res => res.json())
+                .then(datos => { // tablaProfesores
+                    const tbody = document.getElementById(`tabla${tipo.charAt(0).toUpperCase()+ tipo.slice(1)}`);
+                    tbody.innerHTML = "";
+                    datos.forEach(d => {
+                        tbody.innerHTML += `
+                            <tr>
+                                <td>${d.nombre}</td>
+                                ${tipo === "materias" ? `<td>${d.profesores.join(", ")}</td><td>${d.estudiantes}</td>` : ""}
+                                <td>
+                                    <button onclick="editar('${tipo}', ${d.id}, '${d.nombre}')">Editar</button>
+                                    <button onclick="eliminar('${tipo}', ${d.id})">Eliminar</button>
+                                </td>
+                            </tr>
+                        `;
+                    })
+                })
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            cargarLista("profesores");
+            cargarLista("materias");
+            cargarLista("estudiantes");
+        })
+
+    </script>
+</body>
+</html>

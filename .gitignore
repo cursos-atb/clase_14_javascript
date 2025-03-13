@@ -1,0 +1,11 @@
+# Ignorar node_modules en todas partes
+node_modules/
+
+# Ignorar archivos de bloqueo de paquetes
+package-lock.json
+yarn.lock
+
+# Ignorar logs y archivos innecesarios
+npm-debug.log
+.DS_Store
+.env
